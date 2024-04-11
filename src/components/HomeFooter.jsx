@@ -24,17 +24,19 @@ export default function HomeFooter() {
   ]
 
   return (
-    <div className="flex justify-between w-[948px] mx-auto pt-[60px] pb-[45px] bg-[#FFFDF7] px-[20px]">
-      { links.map((item, index) => (
-        <div className="" key={index}>
-          <div className="mb-[20px] text-[16px] text-primary text-medium">{item.title}</div>
-          {
-            item.children.map((link, i) => (
-              <div className="text-[14px] text-light text-[#444] leading-[30px] cursor-pointer" key={i}>{link.label}</div>
-            ))
-          }
-        </div>
-      )) }
+    <div className="w-full bg-[#FFFDF7]">
+      <div className="flex justify-between w-[948px] mx-auto pt-[60px] pb-[45px] px-[20px]">
+        { links.map((item, index) => (
+          <div className="" key={index}>
+            <div className="mb-[20px] text-[16px] text-primary text-medium">{item.title}</div>
+            {
+              item.children.map((link, i) => (
+                <div className="text-[14px] text-light text-[#444] leading-[30px] cursor-pointer" key={i}>{link.label}</div>
+              ))
+            }
+          </div>
+        )) }
+      </div>
     </div>
   )
 }
