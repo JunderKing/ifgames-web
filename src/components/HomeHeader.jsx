@@ -22,7 +22,7 @@ export default function PageHeader() {
     navigate('/web3/wand')
   }
   return (
-    <div className="fixed top-0 left-0 w-full pt-[20px] px-[20px]">
+    <div className="fixed top-0 left-0 w-full pt-[20px] px-[20px]" style={{zIndex: 100}}>
       <div className=" max-w-[1220px] h-[80px] px-[20px] mx-auto flex items-center justify-between bg-primary/70 text-white rounded-[10px]">
         <Link to="/">
           <img className='w-[70px] h-[70px] mr-[60px]' src={logo}/>
