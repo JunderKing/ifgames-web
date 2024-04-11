@@ -5,18 +5,19 @@ import LinkYoutube from '@/assets/header/link-youtube.png'
 import LinkTwitter from '@/assets/header/link-twitter.png'
 import LinkTelegram from '@/assets/header/link-telegram.png'
 import LinkDiscord from '@/assets/header/link-discord.png'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 export default function PageHeader() {
   const navigate = useNavigate()
+  const location = useLocation()
   const menus = [
-    { label: 'About', icon: IconArrowDown },
+    { label: 'About', path: '/about', icon: IconArrowDown },
     { label: 'Play', icon: IconMenuShare },
     { label: 'Build', icon: IconArrowDown },
     { label: 'Services', icon: IconArrowDown },
     { label: 'Splutions', icon: IconArrowDown },
     { label: 'Community', icon: IconArrowDown },
-    { label: 'Blog', action: () => navigate('/blog') },
+    { label: 'Blog', path: '/blog', action: () => navigate('/blog') },
   ]
   const toWeb3 = () => {
     navigate('/web3/wand')
@@ -27,9 +28,9 @@ export default function PageHeader() {
         <Link to="/">
           <img className='w-[70px] h-[70px] mr-[60px]' src={logo}/>
         </Link>
-        <div className='flex flex-1'>
+        <div className="flex flex-1">
           { menus.map((item, index) => (
-            <div className="font-[12px] font-medium mr-[20px] flex items-center cursor-pointer" key={index} onClick={() => item.action && item.action()}>{item.label}
+            <div className={`font-[12px] font-medium mr-[20px] flex items-center cursor-pointer ${location.pathname.startsWith(item.path) && 'text-[#F5CD1D]'}`} key={index} onClick={() => item.action && item.action()}>{item.label}
             { item.icon && <img className='w-[10px] h-[10px] ml-[5px]' src={item.icon}/>}</div>
           ))}
         </div>

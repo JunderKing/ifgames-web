@@ -95,7 +95,7 @@ export default function Home() {
             <StyledButton className="mt-[20px]">Expiore Bridgeworld</StyledButton>
             <img className="mt-[80px] w-[50px] h-[50px]" src={LogoWhite}/>
             <div className="mt-[20px] text-[14px] font-semibold">GOLD is InfiniteGames DAO game points, complete quests, participate in staking and get Gold rewards to play the BTC Layer2 eco-game</div>
-            <StyledButton className="mt-[20px]">Get $IFD</StyledButton>
+            <StyledButton className="mt-[20px]">Do quests to earn GOLD</StyledButton>
           </div>
         </div>
       </div>
