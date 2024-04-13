@@ -20,8 +20,8 @@ export default () => {
       return await Promise.all(list.map(async item => {
         const resp = await farmContract.read('poolInfo', [item.id])
         item.lpAddr = resp[0]
-        item.allocPoint = resp[1]
-        item.stakeAmount = resp[4]
+        item.allocPoint = parseInt(resp[1])
+        item.stakeAmount = parseInt(resp[4])
         return item
       }))
     })

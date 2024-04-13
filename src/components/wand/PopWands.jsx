@@ -59,8 +59,11 @@ export default (props) => {
       <div className="w-[630px] h-[378px] mt-[10px] flex flex-wrap overflow-scroll">
         {
           props.wandList.map((item, index) => (
-            <div className={`relative w-[106px] h-[106px] m-[10px] bg-contain bg-center border-[2px] border-${wandSelected?.tokenId === item.tokenId ? '[#F5CD1D]' : '[#17191B]'} rounded-[10px] cursor-pointer`}
-              style={{ backgroundImage: `url(${IMAGE_MAP[item.color]})` }}
+            <div className={`relative w-[106px] h-[106px] m-[10px] bg-contain bg-center border-[2px] rounded-[10px] cursor-pointer`}
+              style={{ 
+                backgroundImage: `url(${IMAGE_MAP[item.color]})`,
+                borderColor: wandSelected?.tokenId === item.tokenId ? '#F5CD1D' : '#17191B'
+              }}
               key={index} onClick={() => setWandSelected(item)}>
               <div className="absolute bottom-0 left-0 w-full h-[30px] bg-black bg-opacity-50 text-center text-white text-[12px] font-bold rounded-b-[10px]">Level {item.level}</div>
             </div>

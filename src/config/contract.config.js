@@ -1,6 +1,7 @@
 import wandAbi from '@/config/abis/wandAbi.json'
 import goldAbi from '@/config/abis/goldAbi.json'
 import farmAbi from '@/config/abis/farmAbi.json'
+import { erc20Abi } from 'viem'
 
 const config = {
   wand: {
@@ -18,6 +19,10 @@ const config = {
   farm: {
     abi: farmAbi,
     1337: '0xE2A6C61a2D3dD1b4daD746be884D6F5aA869908C'
+  },
+  'IFG-USDT LP': {
+    abi: erc20Abi,
+    1337: '0x3A8b9E499A782EacFD08b2E3268006799F743A16'
   }
 }
 

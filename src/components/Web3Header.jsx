@@ -28,6 +28,7 @@ export default function Web3Header() {
     open()
   }
   const refreshPage = async() => {
+    if (!address) return
     const resp = await $api.goldBalance({ wallet: address })
     setIfgAmount(resp.balance)
   }

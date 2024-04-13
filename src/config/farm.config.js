@@ -10,16 +10,16 @@ const poolConfList = [{
   dexName: 'Uniswap',
   isSingle: true,
   needShow: true,
-// }, {
-//   id: 1,
-//   poolSymbol: 'IFG-USDT',
-//   baseToken: 'IFG',
-//   quoteToken: 'USDT',
-//   stakeToken: 'IFG-USDT LP',
-//   earnToken: 'IFG',
-//   dexName: 'Uniswap',
-//   isSingle: false,
-//   needShow: true,
+}, {
+  id: 1,
+  poolSymbol: 'IFG-USDT',
+  baseToken: 'IFG',
+  quoteToken: 'USDT',
+  stakeToken: 'IFG-USDT LP',
+  earnToken: 'IFG',
+  dexName: 'Uniswap',
+  isSingle: false,
+  needShow: true,
 }]
 
 export function getPoolList() {
