@@ -29,12 +29,14 @@ const config = {
 export function getContractConfig(name, chainId) {
   const contractConf = config[name]
   if (!contractConf) {
-    throw new Error("Wrong contract name: " + name)
+    return { abi: [], address: '0x0000000000000000000000000000000000000000' }
+    // throw new Error("Wrong contract name: " + name)
   }
   const abi = contractConf.abi
   const address = contractConf[chainId]
   if (!address) {
-    throw new Error("Unsupported chain: " + chainId)
+    return { abi: [], address: '0x0000000000000000000000000000000000000000' }
+    // throw new Error("Unsupported chain: " + chainId)
   }
   return { abi, address }
 }
