@@ -23,7 +23,7 @@ export default function Home() {
 
   const navigate = useNavigate()
   const toWeb3 = () => {
-    navigate('/web3/wand')
+    // navigate('/web3/wand')
   }
 
   return (

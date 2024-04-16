@@ -20,7 +20,7 @@ export default function PageHeader() {
     { label: 'Blog', path: '/blog', action: () => navigate('/blog') },
   ]
   const toWeb3 = () => {
-    navigate('/web3/wand')
+    // navigate('/web3/wand')
   }
   return (
     <div className="fixed top-0 left-0 w-full pt-[20px] px-[20px]" style={{zIndex: 100}}>
