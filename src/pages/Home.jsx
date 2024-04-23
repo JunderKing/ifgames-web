@@ -120,7 +120,7 @@ export default function Home() {
         <div className="max-w-[1440px] h-[1085px] box-border flex items-center pl-[75px] pr-[130px] mx-auto">
           <img className="w-[810px] h-[810px]" src={BtmImg}/>
           <div className="text-white ml-[32px] w-[393px]">
-            <div className="text-[14px] font-semibold">Bridgeworld is the center of the Treasure multiverse connecting our ecosystem’s loved IP and games together.</div>
+            <div className="text-[14px] font-semibold">Get your Infinite Wand|Infinite WAND is a proof of community identity that records levels and distributes proceeds</div>
             <StyledButton className="mt-[20px]">Get InfiniteWand</StyledButton>
             <img className="mt-[80px] w-[50px] h-[50px]" src={LogoWhite}/>
             <div className="mt-[20px] text-[14px] font-semibold">GOLD is InfiniteGames DAO game points, complete quests, participate in staking and get Gold rewards to play the BTC Layer2 eco-game</div>
