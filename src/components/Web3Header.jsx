@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from '@/assets/logo.png'
 import ChainArbi from '@/assets/header/chain-arbi.png'
 import ArrowDown from '@/assets/header/arrow-down.png'
 import IconNotice from '@/assets/header/icon-notice.png'
 import IconGift from '@/assets/header/icon-gift.png'
 import IconCart from '@/assets/header/icon-cart.png'
+import IconUser from '@/assets/header/icon-user.png'
 import ScoreLogo from '@/assets/header/score-logo.png'
 import ScoreStar from '@/assets/header/score-star.png'
 import { useWeb3Modal } from '@web3modal/wagmi/react'
@@ -15,23 +16,26 @@ import $api from '@/apis/index'
 import { message } from 'antd'
 
 export default function Web3Header() {
+  const navigate = useNavigate()
   const { open } = useWeb3Modal()
   const { address } = useAccount()
-  const { signMessage } = useSignMessage()
   const [keyword, setKeyword] = useState("")
   const [ifgAmount, setIfgAmount] = useState(0)
 
   const openNetwork = () => {
     open({ view: 'Networks'})
   }
+
   const openAccount = () => {
     open()
   }
+
   const refreshPage = async() => {
     if (!address) return
     const resp = await $api.goldBalance({ wallet: address })
     setIfgAmount(resp.balance)
   }
+
   const handleFaucet = async () => {
     if (!address) return message.error("Please connect walleet")
     const amount = parseInt(keyword) || 800
@@ -39,23 +43,18 @@ export default function Web3Header() {
     refreshPage()
     message.success(`成功领取${amount}测试IFG`)
   }
+
   const handleClaim = async () => {
     if (!address) return message.error("Please connect walleet")
     await $api.goldClaim({ wallet: address })
     refreshPage()
     message.success(`IFG提取成功`)
   }
-  // const signMsg = async () => {
-  //   console.log({keyword})
-  //   signMessage({ message: keyword }, {
-  //     onSuccess(result) {
-  //       console.log({result})
-  //     },
-  //     onError(error) {
-  //       console.log({error})
-  //     }
-  //   })
-  // }
+
+  const toUserPage = async () => {
+    navigate("/web3/user/profile")
+  }
+  
   useEffect(() => {
     refreshPage()
   }, [])
@@ -91,6 +90,7 @@ export default function Web3Header() {
           <img className="w-[34px] h-[34px] ml-[5px] cursor-pointer" src={IconNotice}/>
           <img className="w-[34px] h-[34px] ml-[5px] cursor-pointer" src={IconGift} onClick={handleFaucet}/>
           <img className="w-[34px] h-[34px] ml-[5px] cursor-pointer" src={IconCart}/>
+          <img className="w-[34px] h-[34px] ml-[5px] cursor-pointer" src={IconUser} onClick={toUserPage}/>
 
           <div className="py-[7px] px-[10px] bg-[#07199F] flex items-center text-[18px] text-white ml-[10px] rounded-[10px] cursor-pointer">
             <div className="flex items-center">

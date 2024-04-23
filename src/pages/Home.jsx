@@ -1,12 +1,16 @@
 import TownImg from '@/assets/home/town-img.png'
-import AllGames from '@/assets/home/all-games.png'
-import DiscoverTitle from '@/assets/home/discover-title.png'
 import DiscoverImg from '@/assets/home/discover-img.png'
 import BtmImg from '@/assets/home/btm-img.png'
 import LogoWhite from '@/assets/home/logo-white.png'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import IconDivideAngle from '@/assets/header/divide-angle.png'
+import ImgBanner1 from '@/assets/home/banner1.png'
+import ImgBanner2 from '@/assets/home/banner2.png'
+import ImgBanner3 from '@/assets/home/banner3.png'
+import ImgBanner4 from '@/assets/home/banner4.png'
+import ImgBanner5 from '@/assets/home/banner5.png'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 const StyledButton = styled.div`
   display: inline-block;
@@ -23,7 +27,15 @@ export default function Home() {
 
   const navigate = useNavigate()
   const toWeb3 = () => {
-    // navigate('/web3/wand')
+    navigate('/web3/game')
+  }
+  const handleSwipe = (swiper, progress) => {
+    swiper.slides.forEach((slide, index) => {
+      const scale = 1- (Math.abs(slide.progress) * 0.15)
+      const offset = 15 * slide.progress * Math.abs(slide.progress) / 2
+      let transformCss = `translateX(${offset}%) scale(${scale})`
+      slide.style.transform = transformCss;  
+    })
   }
 
   return (
@@ -34,7 +46,7 @@ export default function Home() {
         <div className="pt-[13.98vw] pl-[9.07vw]">
           <div className=" text-[4.9vw] leading-[5vw] font-semibold text-white">Inifinite<br/>Games DAO</div>
           <div className="mt-[4vw] text-[1.38vw] leading-[1.66vw] text-white font-semibold">Explore the infinite<br/>possibillities of BTC Games</div>
-          <div className="mt-[1.38vw] bg-[#F5CD1D] w-[9.26vw] h-[2.5vw] rounded-[0.74vw] text-[1.11vw] text-center leading-[2.5vw] cursor-pointer" onClick={toWeb3}>start playing</div>
+          <div className="mt-[1.38vw] bg-[#F5CD1D] w-[9.26vw] h-[2.5vw] rounded-[0.74vw] text-[1.11vw] text-center leading-[2.5vw] cursor-pointer" onClick={toWeb3}>START</div>
         </div>
       </div>
 
@@ -72,14 +84,31 @@ export default function Home() {
             <div className="text-white text-[30px] font-medium leading-[30px] absolute top-0 left-[4px] whitespace-nowrap">All Games</div>
             <div className="pl-[4px] mt-[9px] text-[#444] text-[15px] leading-[21px]">InfiniteGames DAO</div>
           </div>
-          <div className="flex items-center justify-between ml-[130px] mr-[14px]">
+          <Swiper
+            spaceBetween={30}
+            slidesPerView={'auto'}
+            centeredSlides={true}
+            watchSlidesProgress={true}
+            onProgress={handleSwipe}
+            loop={true}
+          >
+            {
+              [ImgBanner1, ImgBanner2, ImgBanner3, ImgBanner4, ImgBanner5, ImgBanner4, ImgBanner5].map((item, index) => (
+                <SwiperSlide className="w-[300px] cursor-pointer" key={index}>
+                  <img className="w-[300px] h-[430px]" src={item} />
+                </SwiperSlide>
+              ))
+            }
+          </Swiper>
+          <div className="text-white text-[14px] font-medium cursor-pointer text-center mt-[20px]">View ALL Games</div>
+          <div className="flex items-center justify-between mt-[76px] ml-[130px] mr-[14px]">
             <div>
               <div className="w-[24px] pt-[77px] relative">
                 <div className="w-[279px] h-[24px] bg-[#0A1FB8]"></div>
                 <div className="text-white text-[50px] font-medium leading-[46px] absolute top-0 left-[4px] whitespace-nowrap">Discover<br/>game value</div>
                 <div className="w-[271px] pl-[4px] mt-[8px] text-[#ccc] font-medium text-[12px] leading-[17px]">Participate in the game, complete the game missions, participate in the game promotion, build the game community, unlock double bonus points</div>
               </div>
-              <StyledButton className="mt-[20px]">start playing</StyledButton>
+              <StyledButton className="mt-[20px]">START</StyledButton>
             </div>
             <img className="ml-[10px] w-[980px] h-[562px]" src={DiscoverImg}/>
           </div>
@@ -92,7 +121,7 @@ export default function Home() {
           <img className="w-[810px] h-[810px]" src={BtmImg}/>
           <div className="text-white ml-[32px] w-[393px]">
             <div className="text-[14px] font-semibold">Bridgeworld is the center of the Treasure multiverse connecting our ecosystem’s loved IP and games together.</div>
-            <StyledButton className="mt-[20px]">Expiore Bridgeworld</StyledButton>
+            <StyledButton className="mt-[20px]">Get InfiniteWand</StyledButton>
             <img className="mt-[80px] w-[50px] h-[50px]" src={LogoWhite}/>
             <div className="mt-[20px] text-[14px] font-semibold">GOLD is InfiniteGames DAO game points, complete quests, participate in staking and get Gold rewards to play the BTC Layer2 eco-game</div>
             <StyledButton className="mt-[20px]">Do quests to earn GOLD</StyledButton>

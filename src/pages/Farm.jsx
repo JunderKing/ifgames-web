@@ -37,7 +37,7 @@ export default () => {
   }, [])
 
   return (
-    <div className="w-full h-full overflow-scroll py-[70px] bg-[#0E1622] bg-center bg-cover bg-[url('@/assets/farm/bg-page.png')]">
+    <div className="w-full min-h-full py-[70px] bg-[#0E1622] bg-center bg-cover bg-[url('@/assets/farm/bg-page.png')]" style={{height: '100%'}}>
       <div className="w-[946px] mx-auto">
         {/* Title */}
         <div className="flex items-center ml-[15px]">

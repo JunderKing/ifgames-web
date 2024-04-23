@@ -10,18 +10,17 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 export default function PageHeader() {
   const navigate = useNavigate()
   const location = useLocation()
+  const toWeb3 = () => {
+    navigate('/web3/game')
+  }
   const menus = [
     { label: 'About', path: '/about', icon: IconArrowDown },
-    { label: 'Play', icon: IconMenuShare },
+    { label: 'Play', icon: IconMenuShare, action: () => navigate('/web3/game') },
     { label: 'Build', icon: IconArrowDown },
-    { label: 'Services', icon: IconArrowDown },
-    { label: 'Splutions', icon: IconArrowDown },
     { label: 'Community', icon: IconArrowDown },
+    { label: 'Staking', icon: IconMenuShare, action: () => navigate('/web3/farm') },
     { label: 'Blog', path: '/blog', action: () => navigate('/blog') },
   ]
-  const toWeb3 = () => {
-    // navigate('/web3/wand')
-  }
   return (
     <div className="fixed top-0 left-0 w-full pt-[20px] px-[20px]" style={{zIndex: 100}}>
       <div className=" max-w-[1220px] h-[80px] px-[20px] mx-auto flex items-center justify-between bg-primary/70 text-white rounded-[10px]">
@@ -30,7 +29,7 @@ export default function PageHeader() {
         </Link>
         <div className="flex flex-1">
           { menus.map((item, index) => (
-            <div className={`font-[12px] font-medium mr-[20px] flex items-center cursor-pointer ${location.pathname.startsWith(item.path) && 'text-[#F5CD1D]'}`} key={index} onClick={() => item.action && item.action()}>{item.label}
+            <div className={`text-[12px] font-medium mr-[20px] flex items-center cursor-pointer ${location.pathname.startsWith(item.path) && 'text-[#F5CD1D]'}`} key={index} onClick={() => item.action && item.action()}>{item.label}
             { item.icon && <img className='w-[10px] h-[10px] ml-[5px]' src={item.icon}/>}</div>
           ))}
         </div>

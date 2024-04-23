@@ -1,0 +1,54 @@
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+
+export default () => {
+  return (
+    <div className="w-full bg-[#101827] pt-[130px] text-white pb-[30px] font-light">
+      <div className="mx-auto text-[40px] leading-[56px] text-center font-semibold">DappRadar Supports Web3 Game Night 2024 by Pacific Meta</div>
+      <div className="mt-[20px] text-[14px] leading-[21px] w-[669px] mx-auto mb-[20px] space-y-[25px]">
+        <div>A deepdive into the Web3 gaming market in Asia</div>
+
+        <div className="font-semibold">For the second time, DappRadar powers the Web3 Game Night, hosted by Pacific Meta in March 2024. During the event speakers will share insights in the growing Japanese Web3 gaming market, allowing key players to connect, share and engage.</div>
+
+        <div>DappRadar is excited to be a part of this wonderful event. Together with Pacific Meta we will share our latest research into the Web3 gaming market in Asia. Last year we headlined with ‘Asia has the potential to dominate the Web3 gaming market’, so make sure you don’t miss out on what we will unveil in our newest report.</div>
+
+        <div>Web3 Game Night 2024 will take place in March. During the evening there will be panel discussions with key opinion leaders. In addition, attendees can expect plenty of options to network with Web3 gaming evangelists in the Japanese blockchain industry.</div>
+        
+        <div className="text-[20px] font-semibold">Connect at Web3 Game Night</div>
+
+        <div>Like last year, Pacific Meta builds upon the success of their first Web3 Game Night. Web3 Game Night is a key event where founders, developers and venture capitalists talk about the market. Moreover, they will look at the position Japan takes in the Web3 gaming space, and look forward to further growth of the Web3 gaming market.</div>
+
+        <div>With Astar Network and Oasys, the Japanese Web3 ecosystem already has two leading blockchain ecosystems. Moreover, developers like Double Jump Tokyo are specialized in Web3 gaming, while renowned game companies like Square Enix and SEGA invest in and build blockchain-powered gaming projects. Pacific Meta foresees further growth as international projects learn to connect with the Japanese gaming audience to form strong communities.</div>
+
+        <div className="text-[20px] font-semibold">Gaming report</div>
+
+        <div>Pacific Meta and DappRadar are working together on a report that gives us insights into the growth, audience, the current market status and further potential of Web3 gaming in the Asian market. The upcoming report will make its debut at Web3 Game Night, and we can’t wait to unveil what the many hours of research has shown.<br/>Press the ‘Start’ button to pick your game</div>
+      </div>
+
+      <div className="px-[30px]">
+        <Swiper
+          spaceBetween={65}
+          slidesPerView={3}
+          centeredSlides={false}
+          onSlideChange={() => console.log('slide change')}
+          onSwiper={(swiper) => console.log(swiper)}
+        >
+          {
+            new Array(5).fill(0).map((item, index) => (
+              <SwiperSlide key={index}>
+                <div className="relative w-[350px] h-[300px] p-[20px] rounded-[10px] border-[1px] border-[#163159] bg-[#101827] text-white">
+                  <div className="w-[310px] h-[160px] bg-[#D9D9D9]"></div>
+                  <div className="text-[12px] leading-[14px] mt-[23px]">Crypto Hype Pushes Dapp Industry Adoption to New All-Time High with 6,7 Million Daily Wallets</div>
+                  <div className="w-full px-[20px] flex justify-between items-center absolute left-0 bottom-[26px]">
+                    <span className="text-[12px] font-medium">yesterday</span>
+                    <span className="text-[16px] font-medium cursor-pointer">Read Now</span>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))
+          }
+        </Swiper>
+      </div>
+    </div>
+  )
+}

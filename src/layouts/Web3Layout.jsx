@@ -5,6 +5,9 @@ import Web3Menu from "../components/Web3Menu";
 import { Web3ModalProvider } from "../providers/Web3Modal";
 import Farm from "../pages/Farm";
 import FarmPool from "../pages/FarmPool";
+import UserLayout from "./UserLayout";
+import Game from "../pages/Game";
+import GameDetail from "../pages/GameDetail";
 
 export default function Web3Layout() {
   return (
@@ -14,9 +17,12 @@ export default function Web3Layout() {
         <Web3Menu/>
         <div className="flex-1 h-full overflow-scroll">
           <Routes>
+            <Route path="game" Component={Game}/>
+            <Route path="game/detail" Component={GameDetail}/>
             <Route path="wand" Component={Wand}/>
             <Route path="farm" Component={Farm}/>
             <Route path="farm/pool" Component={FarmPool}/>
+            <Route path="user/*" Component={UserLayout}/>
           </Routes>
         </div>
       </div>

@@ -11,7 +11,7 @@ export default function Web3Menu() {
   const location = useLocation()
   const navigate = useNavigate()
   const menuList = [
-    { label: 'Games', icon: IconGame, children: []},
+    { label: 'Games', icon: IconGame, path: '/web3/game', children: []},
     { label: 'Quests', icon: IconQuest, children: []},
     { label: 'MarketPlace', icon: IconMarket, children: []},
     { label: 'Earn', icon: IconGame, path: '/web3/farm', children: []},
