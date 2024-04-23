@@ -31,8 +31,8 @@ export default function Home() {
   }
   const handleSwipe = (swiper, progress) => {
     swiper.slides.forEach((slide, index) => {
-      const scale = 1- (Math.abs(slide.progress) * 0.15)
-      const offset = 15 * slide.progress * Math.abs(slide.progress) / 2
+      const scale = 1- (Math.abs(slide.progress) * 0.12)
+      const offset = 12 * slide.progress * Math.abs(slide.progress) / 2
       let transformCss = `translateX(${offset}%) scale(${scale})`
       slide.style.transform = transformCss;  
     })
@@ -93,7 +93,7 @@ export default function Home() {
             loop={true}
           >
             {
-              [ImgBanner1, ImgBanner2, ImgBanner3, ImgBanner4, ImgBanner5, ImgBanner4, ImgBanner5].map((item, index) => (
+              [ImgBanner1, ImgBanner2, ImgBanner3, ImgBanner1, ImgBanner2, ImgBanner4, ImgBanner5].map((item, index) => (
                 <SwiperSlide className="w-[300px] cursor-pointer" key={index}>
                   <img className="w-[300px] h-[430px]" src={item} />
                 </SwiperSlide>
