@@ -27,7 +27,7 @@ export default function Home() {
 
   const navigate = useNavigate()
   const toWeb3 = () => {
-    navigate('/web3/game')
+    // navigate('/web3/game')
   }
   const handleSwipe = (swiper, progress) => {
     swiper.slides.forEach((slide, index) => {
