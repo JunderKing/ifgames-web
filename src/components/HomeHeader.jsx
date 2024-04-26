@@ -11,7 +11,7 @@ export default function PageHeader() {
   const navigate = useNavigate()
   const location = useLocation()
   const toWeb3 = () => {
-    // navigate('/web3/game')
+    navigate('/web3/game')
   }
   const menus = [
     { label: 'About', path: '/about', icon: IconArrowDown },

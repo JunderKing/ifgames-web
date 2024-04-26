@@ -2,14 +2,17 @@ import ImgCover from '@/assets/game/cover-main.png'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import ImgIcon from '@/assets/header/chain-arbi.png'
 import ImgNft from '@/assets/game/img-nft.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import $api from '@/apis/index.js'
+import { Link } from 'react-router-dom'
 
-function Overview() {
+function Overview(props) {
+  const subImages = props.data.subImages?.split(',') || []
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center pb-[20px]">
       {/* LEFT */}
       <div className="w-[800px]">
-        <img className="w-[800px] h-[450px]" src={ImgCover} />
+        <img className="w-[800px] h-[450px]" src={props.data.mainImage} />
         <Swiper
           className="mt-[21px]"
           spaceBetween={28}
@@ -17,24 +20,24 @@ function Overview() {
           centeredSlides={false}
         >
           {
-            new Array(5).fill(0).map((item, index) => (
+            subImages.map((url, index) => (
               <SwiperSlide key={index}>
-                <div className="w-[168px] h-[118px] p-[12px] bg-[#1E2634] rounded-[10px] cursor-pointer">
-                  <img className="w-full h-full" src={ImgCover} />
+                <div className="w-[168px] h-[118px] p-[12px] hover:bg-[#1E2634] rounded-[10px] cursor-pointer">
+                  <img className="w-full h-full" src={url} />
                 </div>
               </SwiperSlide>
             ))
           }
         </Swiper>
-        <div className="mt-[20px] p-[20px] rounded-[10px] bg-[#161D2C] text-white leading-[20px] text-[14px] font-medium">TownStoryGalaxy is a social business game based on Web3, created by the core development team of Zynga, a well-known game company in Silicon Valley. Players can build their own town in the game, communicate and interact with players around the world, and experience unparalleled social experience and adventure fun.</div>
+        <div className="mt-[20px] p-[20px] rounded-[10px] bg-[#161D2C] text-white leading-[20px] text-[14px] font-medium">{props.data.intro}</div>
       </div>
       {/* RIGHT */}
       <div className="w-[254px] ml-[34px]">
-        <div className="ml-[14px] w-[240px] h-[48px] rounded-[10px] bg-[#FACE61] text-center text-[20px] text-black leading-[48px] font-medium cursor-pointer">Play</div>
+        <a className="inline-block ml-[14px] w-[240px] h-[48px] rounded-[10px] bg-[#FACE61] text-center text-[20px] text-black leading-[48px] font-medium cursor-pointer" href={props.data.link} target="_blank">Play</a>
         <div className="w-full mt-[10px] bg-[#131D2E] rounded-[10px] px-[10px] py-[20px]">
           <div className="flex items-center">
-            <img className="w-[50px] h-[50px] rounded-[8px]" src={ImgCover} />
-            <div className="ml-[10px] text-[16px] text-white font-medium">TownStoryGalaxy</div>
+            <img className="w-[50px] h-[50px] rounded-[8px]" src={props.data.logo} />
+            <div className="ml-[10px] text-[16px] text-white font-medium">{props.data.name}</div>
           </div>
           <div className="mt-[10px]">
             <div className="flex items-center justify-between text-[#9FA3A9] text-[14px] leading-[20px]">
@@ -101,6 +104,16 @@ function Collection() {
 }
 
 export default () => {
+
+  const [pageData, setPageDate] = useState({})
+  const refreshPage = async () => {
+    const resp = await $api.gameDetail({id: 1})
+    setPageDate(resp)
+  }
+  useEffect(() => {
+    refreshPage()
+  }, [])
+
   const menus = [
     { label: 'Overview', component: Overview },
     { label: 'Collections', component: Collection },
@@ -110,9 +123,10 @@ export default () => {
     { label: 'Play', component: () => {} },
   ]
   const [activeMenu, setActiveMenu] = useState(menus[0])
+
   return (
     <div className="w-full min-h-full bg-[#0E1622]">
-      <div className="w-full h-[258px] bg-center bg-cover bg-[url('@/assets/home/main-img.png')]"></div>
+      <div className="w-full h-[258px] bg-center bg-cover" style={{backgroundImage: `url(${pageData.headImage})`}}></div>
       <div className="w-[1090px] mx-auto">
         <div className="w-[800px] h-[62px] flex items-center justify-around text-white text-[16px] font-semibold">
           {
@@ -122,7 +136,15 @@ export default () => {
           }
         </div>
         {
-          activeMenu.component()
+          (() => {
+            switch (activeMenu.label) {
+              case 'Overview':
+                return <Overview data={pageData}/>
+              case 'Collections':
+                return <Collection/>
+            }
+
+          })()
         }
       </div>
     </div>

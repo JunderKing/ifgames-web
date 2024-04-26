@@ -11,6 +11,8 @@ import ImgBanner3 from '@/assets/home/banner3.png'
 import ImgBanner4 from '@/assets/home/banner4.png'
 import ImgBanner5 from '@/assets/home/banner5.png'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import $api from '@/apis/index.js'
+import { useEffect, useState } from 'react'
 
 const StyledButton = styled.div`
   display: inline-block;
@@ -24,10 +26,16 @@ const StyledButton = styled.div`
 `;
 
 export default function Home() {
+  const [swiperGameList, setSwiperGameList] = useState([])
+  const refreshPage = async () => {
+    const resp = await $api.homeMain()
+    setSwiperGameList(resp.swiperGameList)
+  }
+  useEffect(() => { refreshPage() }, [])
 
   const navigate = useNavigate()
   const toWeb3 = () => {
-    // navigate('/web3/game')
+    navigate('/web3/game')
   }
   const handleSwipe = (swiper, progress) => {
     swiper.slides.forEach((slide, index) => {
@@ -85,6 +93,7 @@ export default function Home() {
             <div className="pl-[4px] mt-[9px] text-[#444] text-[15px] leading-[21px]">InfiniteGames DAO</div>
           </div>
           <Swiper
+            className="w-[1450px]"
             spaceBetween={30}
             slidesPerView={'auto'}
             centeredSlides={true}
@@ -93,9 +102,9 @@ export default function Home() {
             loop={true}
           >
             {
-              [ImgBanner1, ImgBanner2, ImgBanner3, ImgBanner1, ImgBanner2, ImgBanner4, ImgBanner5].map((item, index) => (
-                <SwiperSlide className="w-[300px] cursor-pointer" key={index}>
-                  <img className="w-[300px] h-[430px]" src={item} />
+              swiperGameList.map((item, index) => (
+                <SwiperSlide className="w-[300px] cursor-pointer" key={index} onClick={() => navigate('/web3/game/detail?id=' + item.gameId)}>
+                  <img className="w-[300px] h-[430px]" src={item.image} />
                 </SwiperSlide>
               ))
             }

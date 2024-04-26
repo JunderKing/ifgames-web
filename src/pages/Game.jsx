@@ -2,6 +2,8 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import ImgFeature from '@/assets/game/feature2.png'
 import { useNavigate } from "react-router-dom"
 import ImgNft from '@/assets/game/img-nft.png'
+import $api from '@/apis/index.js'
+import { useEffect, useState } from "react"
 
 function Title(props) {
   return (
@@ -10,9 +12,18 @@ function Title(props) {
 }
 
 export default () => {
+  const [featureGameList, setFeatureGameList] = useState([])
+  const [spotlightGameList, setSpotlightGameList] = useState([])
+  const refreshPage = async () => {
+    const resp = await $api.homeWeb3()
+    setFeatureGameList(resp.featureGameList)
+    setSpotlightGameList(resp.spotlightGameList)
+  }
+  useEffect(() => { refreshPage() }, [])
+
   const navigate = useNavigate()
-  const toDetail = () => {
-    navigate('/web3/game/detail')
+  const toDetail = (id) => {
+    navigate(`/web3/game/detail?id=${id}`)
   }
   return (
     <div className="w-full bg-[#0E1622]">
@@ -30,13 +41,13 @@ export default () => {
         <Title>Featured Games</Title>
         <Swiper
           spaceBetween={90}
-          slidesPerView={3.8}
+          slidesPerView='auto'
           centeredSlides={false}
         >
           {
-            new Array(4).fill(0).map((item, index) => (
-              <SwiperSlide key={index} onClick={toDetail}>
-                <img className="w-[210px] h-[300px] cursor-pointer" src={ImgFeature}/>
+            featureGameList.map((item, index) => (
+              <SwiperSlide className="w-[210px]" key={index} onClick={() => toDetail(item.gameId)}>
+                <img className="w-[210px] h-[300px] cursor-pointer" src={item.image}/>
               </SwiperSlide>
             ))
           }
@@ -44,17 +55,17 @@ export default () => {
         <Title>Spotlight</Title>
         <Swiper
           spaceBetween={90}
-          slidesPerView={2.8}
+          slidesPerView='auto'
           centeredSlides={false}
         >
           {
-            new Array(4).fill(0).map((item, index) => (
-                <SwiperSlide key={index}>
+            spotlightGameList.map((item, index) => (
+                <SwiperSlide className="w-[380px]" key={index} onClick={() => toDetail(item.gameId)}>
                   <div className="w-[380px] h-[340px] bg-[#131C2F] cursor-pointer">
-                    <img className="w-[380px] h-[220px]" src={ImgFeature}/>
+                    <img className="w-[380px] h-[220px]" src={item.image}/>
                     <div className="px-[20px] py-[28px] text-white text-[12px]">
-                      <div className="text-[#F5CD1D] leading-[17px]">Treasure Quests</div>
-                      <div className="text-[14px] leading-[20px] my-[5px]">Treasure Quests are now LIVE!</div>
+                      {/* <div className="text-[#F5CD1D] leading-[17px]">Treasure Quests</div> */}
+                      <div className="text-[14px] leading-[20px] my-[5px]">{item.title}</div>
                       <div className="text-[#B9B9B9] leading-[17px]">Announcement</div>
                     </div>
                   </div>
