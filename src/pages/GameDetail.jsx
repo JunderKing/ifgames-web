@@ -4,7 +4,7 @@ import ImgIcon from '@/assets/header/chain-arbi.png'
 import ImgNft from '@/assets/game/img-nft.png'
 import { useEffect, useState } from 'react'
 import $api from '@/apis/index.js'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom'
 
 function Overview(props) {
   const subImages = props.data.subImages?.split(',') || []
@@ -104,10 +104,12 @@ function Collection() {
 }
 
 export default () => {
+  const [searchParams] = useSearchParams()
+  const id = parseInt(searchParams.get('id'))
 
   const [pageData, setPageDate] = useState({})
   const refreshPage = async () => {
-    const resp = await $api.gameDetail({id: 1})
+    const resp = await $api.gameDetail({id})
     setPageDate(resp)
   }
   useEffect(() => {
