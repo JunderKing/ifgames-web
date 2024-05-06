@@ -35,7 +35,7 @@ export default function Home() {
 
   const navigate = useNavigate()
   const toWeb3 = () => {
-    navigate('/web3/game')
+    // navigate('/web3/game')
   }
   const handleSwipe = (swiper, progress) => {
     swiper.slides.forEach((slide, index) => {
@@ -52,7 +52,7 @@ export default function Home() {
       {/* COVER */}
       <div className="w-full bg-cover bg-center bg-[url('@/assets/home/main-img.png')] bg-[#FFF4DA]" style={{height: '50vw'}}>
         <div className="pt-[13.98vw] pl-[9.07vw]">
-          <div className=" text-[4.9vw] leading-[5vw] font-semibold text-white">Inifinite<br/>Games DAO</div>
+          <div className=" text-[4.9vw] leading-[5vw] font-semibold text-white">Infinite<br/>Games DAO</div>
           <div className="mt-[4vw] text-[1.38vw] leading-[1.66vw] text-white font-semibold">Explore the infinite<br/>possibillities of BTC Games</div>
           <div className="mt-[1.38vw] bg-[#F5CD1D] w-[9.26vw] h-[2.5vw] rounded-[0.74vw] text-[1.11vw] text-center leading-[2.5vw] cursor-pointer" onClick={toWeb3}>START</div>
         </div>
